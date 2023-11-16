@@ -1,33 +1,16 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include "Screen.h"
 
-
-
-/* *****************************************************************************
- * DEFINITIONS
- **************************************************************************** */
-#define WIN_WIDTH  800
-#define WIN_HEIGHT 800
+#define WINDOW_WIDTH  800
+#define WINDOW_HEIGHT 800
 
 #define SPEED 8/* snake actions per second */
 
-#define GRID_COUNT_X 32
-#define GRID_COUNT_Y 32
+#define MAP_WIDTH 32
+#define MAP_HEIGHT 32
 
 #define GRID_LINE_WIDTH 2
 
-GLfloat color_backgoundD[3] = {0.14, 0.16, 0.18};
-GLfloat color_grid[3] = { 0.91, 0.91, 0.91 };
-GLfloat color_snake_head[3] = { 0.5, 1.0, 0.5 };
-GLfloat color_snake_tail[3] = { 0.6, 0.88, 0.6 };
-GLfloat color_food[3] = { 1.0, 0.5, 0.5 };
 
- /* *****************************************************************************
-  * GLOBAL VARIABLES
-  **************************************************************************** */
 GLfloat vertices[] = {
   0.0, 0.0,
   0.0, 1.0,
@@ -53,6 +36,7 @@ const GLchar* vShader_Code =
 "    pos_center.y - (GRID_SIZE.y / 2) + (v_pos.y * GRID_SIZE.y),\n"
 "    0.0, 1.0);\n"
 "}\0";
+
 const GLchar* fShader_Code =
 "#version 330 core\n"
 "out vec4 fragment_color;\n"
@@ -61,40 +45,12 @@ const GLchar* fShader_Code =
 "  fragment_color = vec4(COLOR, 1.0);\n"
 "}\0";
 
-const GLchar* grid_vShader_Code =
-"#version 330 core\n"
-"layout (location = 0) in vec2 v_pos;\n"
-"void main(){\n"
-"  gl_Position = vec4(v_pos * 2 - 1, 0.5, 1.0);\n"
-"}\0";
-
-const GLchar* grid_fShader_Code =
-"#version 330 core\n"
-"out vec4 fragment_color;\n"
-"uniform vec3 COLOR;\n"
-"uniform vec2 WIN_SIZE;\n"
-"uniform vec2 GRID_COUNT;\n"
-"uniform float GRID_LINE_WIDTH;\n"
-"void main(){\n"
-"  vec2 GRID_SIZE = vec2(WIN_SIZE.x / GRID_COUNT.x, WIN_SIZE.y / GRID_COUNT.y);\n"
-"  vec2 mod_val = vec2(mod(gl_FragCoord.x, GRID_SIZE.x), mod(gl_FragCoord.y, GRID_SIZE.y));\n"
-"  if(\n"
-"    (mod_val.x < GRID_LINE_WIDTH / 2 || mod_val.x > GRID_SIZE.x - GRID_LINE_WIDTH / 2) &&\n"
-"    (mod_val.y < GRID_LINE_WIDTH * 2 || mod_val.y > GRID_SIZE.y - GRID_LINE_WIDTH * 2)\n"
-"  )\n"
-"    fragment_color = vec4(COLOR, 1.0);\n"
-"  else if(\n"
-"    (mod_val.y < GRID_LINE_WIDTH / 2 || mod_val.y > GRID_SIZE.y - GRID_LINE_WIDTH / 2) &&\n"
-"    (mod_val.x < GRID_LINE_WIDTH * 2 || mod_val.x > GRID_SIZE.x - GRID_LINE_WIDTH * 2)\n"
-"  )\n"
-"    fragment_color = vec4(COLOR, 1.0);\n"
-"  else discard;\n"
-"}\0";
 
 struct Button
 {
     GLboolean down, last, pressed;
 };
+
 struct Keyboard
 {
     struct Button keys[GLFW_KEY_LAST];
@@ -113,7 +69,7 @@ enum Directions
 struct Snake
 {
     GLuint counter;
-    GLuint positions[GRID_COUNT_X * GRID_COUNT_Y];
+    GLuint positions[MAP_WIDTH * MAP_HEIGHT];
     GLuint direction;
 };
 struct Snake snake;
@@ -126,7 +82,7 @@ GLdouble TIME_NOW, TIME_LAST, TIME_DELTA, TIME_SUM;
  **************************************************************************** */
 GLuint random_position(void)
 {
-    GLuint RND = (GLuint)(rand() % (GRID_COUNT_X * GRID_COUNT_Y));
+    GLuint RND = (GLuint)(rand() % (MAP_WIDTH * MAP_HEIGHT));
     GLboolean free_position;
     do {
         free_position = GL_TRUE;
@@ -136,8 +92,8 @@ GLuint random_position(void)
             {
                 free_position = GL_FALSE;
                 RND++;
-                if (RND >= (GRID_COUNT_X * GRID_COUNT_Y))
-                    RND %= (GRID_COUNT_X * GRID_COUNT_Y);
+                if (RND >= (MAP_WIDTH * MAP_HEIGHT))
+                    RND %= (MAP_WIDTH * MAP_HEIGHT);
             }
         }
     } while (!free_position);
@@ -152,13 +108,13 @@ void snake_logic(void)
 
     /* check wall hit */
     if (
-        (snake.positions[0] % GRID_COUNT_X == 0
+        (snake.positions[0] % MAP_WIDTH == 0
             && snake.direction == LEFT) ||
-        (snake.positions[0] % GRID_COUNT_X == GRID_COUNT_X - 1
+        (snake.positions[0] % MAP_WIDTH == MAP_WIDTH - 1
             && snake.direction == RIGHT) ||
-        (snake.positions[0] / GRID_COUNT_X == 0
+        (snake.positions[0] / MAP_WIDTH == 0
             && snake.direction == UP) ||
-        (snake.positions[0] / GRID_COUNT_X == GRID_COUNT_Y - 1
+        (snake.positions[0] / MAP_WIDTH == MAP_HEIGHT - 1
             && snake.direction == DOWN)
         )
     {
@@ -174,15 +130,15 @@ void snake_logic(void)
     /* update snake_head_position */
     if (snake.direction == LEFT) snake.positions[0] -= 1;
     else if (snake.direction == RIGHT) snake.positions[0] += 1;
-    else if (snake.direction == UP) snake.positions[0] -= GRID_COUNT_X;
-    else if (snake.direction == DOWN) snake.positions[0] += GRID_COUNT_X;
+    else if (snake.direction == UP) snake.positions[0] -= MAP_WIDTH;
+    else if (snake.direction == DOWN) snake.positions[0] += MAP_HEIGHT;
 
     /* FOOOOOD eat check */
     if (snake.positions[0] == food_position)
         snake.counter += 1;
 
     /* check if game won */
-    if (snake.counter >= GRID_COUNT_X * GRID_COUNT_Y)
+    if (snake.counter >= MAP_WIDTH * MAP_HEIGHT)
         snake.counter = 1;
 
     /* update snake_tail_positions */
@@ -202,7 +158,6 @@ void snake_logic(void)
     if (_last_snake_length != snake.counter)
         food_position = random_position();
 }
-
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     if (key < 0)
@@ -261,43 +216,24 @@ void key_functions(GLFWwindow* window)
     }
 }
 
-/* *****************************************************************************
- * MAIN LOOP
- **************************************************************************** */
-int main(int argc, char const* argv[])
-{
-    printf("Hi guys!\n");
+
+
+
+
+int main(void) {
+
+    Screen screen(WINDOW_WIDTH, WINDOW_HEIGHT, "snake");
+
+    screen.glfw_init();
+
     srand(time(NULL));
 
-    if (!glfwInit())
-    {
-        fprintf(stderr, "ERROR: Failed init GLFW!\n");
-        exit(EXIT_FAILURE);
-    }
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-#ifdef __APPLE__
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
-#endif
+    screen.window_init();
 
-    GLFWwindow* window = glfwCreateWindow(WIN_WIDTH, WIN_HEIGHT, "dnqr.snake_clone", NULL, NULL);
-    if (window == NULL)
-    {
-        fprintf(stderr, "ERROR: Failed creating GLFW window!\n");
-        glfwTerminate();
-        exit(EXIT_FAILURE);
-    }
-    glfwMakeContextCurrent(window);
-    glfwSetKeyCallback(window, key_callback);
+    screen.glad_init();
 
-    if (!gladLoadGL())
-    {
-        fprintf(stderr, "ERROR: Failed init GLAD (OpenGL)!\n");
-        glfwTerminate();
-        exit(EXIT_FAILURE);
-    }
-    glEnable(GL_DEPTH_TEST);
+    glfwSetKeyCallback(screen.window, key_callback);
+
 
     GLuint vShader, fShader, shader_programm;
     vShader = glCreateShader(GL_VERTEX_SHADER);
@@ -312,20 +248,6 @@ int main(int argc, char const* argv[])
     glLinkProgram(shader_programm);
     glDeleteShader(vShader);
     glDeleteShader(fShader);
-
-    GLuint grid_vShader, grid_fShader, grid_shader_programm;
-    grid_vShader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(grid_vShader, 1, &grid_vShader_Code, NULL);
-    glCompileShader(grid_vShader);
-    grid_fShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(grid_fShader, 1, &grid_fShader_Code, NULL);
-    glCompileShader(grid_fShader);
-    grid_shader_programm = glCreateProgram();
-    glAttachShader(grid_shader_programm, grid_vShader);
-    glAttachShader(grid_shader_programm, grid_fShader);
-    glLinkProgram(grid_shader_programm);
-    glDeleteShader(grid_vShader);
-    glDeleteShader(grid_fShader);
 
 
     GLuint VAO, VBO, EBO;
@@ -343,15 +265,8 @@ int main(int argc, char const* argv[])
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), 0);
     glEnableVertexAttribArray(0);
 
-    //snake = (struct Snake)
-    //{
-    //  .counter = 1,
-    //  .positions[0] = (GLuint)(rand() % (GRID_COUNT_X * GRID_COUNT_Y)),
-    //  .direction = PAUSE
-    //};
-
     snake.counter = 1;
-    snake.positions[0] = (GLuint)(rand() % (GRID_COUNT_X * GRID_COUNT_Y));
+    snake.positions[0] = (GLuint)(rand() % (MAP_WIDTH * MAP_HEIGHT));
     snake.direction = PAUSE;
 
     food_position = random_position();
@@ -359,15 +274,13 @@ int main(int argc, char const* argv[])
     TIME_NOW = TIME_LAST = glfwGetTime();
     TIME_DELTA = TIME_SUM = 0.0;
 
-    while (!glfwWindowShouldClose(window))
+
+    while (!glfwWindowShouldClose(screen.window))
     {
-        glClearColor(
-            color_backgoundD[0],
-            color_backgoundD[1],
-            color_backgoundD[2],
-            1.0);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        key_functions(window);
+        glClearColor(0.14, 0.16, 0.18, 1.0);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        key_functions(screen.window);
 
         TIME_NOW = glfwGetTime();
         TIME_DELTA = TIME_NOW - TIME_LAST;
@@ -381,65 +294,28 @@ int main(int argc, char const* argv[])
 
         glBindVertexArray(VAO);
         glUseProgram(shader_programm);
-        glUniform2f(
-            glGetUniformLocation(shader_programm, "GRID_COUNT"),
-            (GLfloat)GRID_COUNT_X,
-            (GLfloat)GRID_COUNT_Y);
+        glUniform2f(glGetUniformLocation(shader_programm, "GRID_COUNT"), (GLfloat)MAP_WIDTH, (GLfloat)MAP_HEIGHT);
+
         /* snake */
         for (GLuint i = 0; i < snake.counter; i++)
         {
-            glUniform1f(
-                glGetUniformLocation(shader_programm, "POSITION"),
-                snake.positions[i]);
+            glUniform1f(glGetUniformLocation(shader_programm, "POSITION"), snake.positions[i]);
+
             if (i == 0)
-                glUniform3f(
-                    glGetUniformLocation(shader_programm, "COLOR"),
-                    color_snake_head[0],
-                    color_snake_head[1],
-                    color_snake_head[2]);
+                glUniform3f( glGetUniformLocation(shader_programm, "COLOR"), 0.5, 1.0, 0.5); //zrobimy ze glowa sneka to bedzie skubi, ja sie tym zajme
             else
-                glUniform3f(
-                    glGetUniformLocation(shader_programm, "COLOR"),
-                    color_snake_tail[0],
-                    color_snake_tail[1],
-                    color_snake_tail[2]);
+                glUniform3f(glGetUniformLocation(shader_programm, "COLOR"),0.5, 1.0, 0.5);
+
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
         }
+
         /* food */
-        glUniform1f(
-            glGetUniformLocation(shader_programm, "POSITION"),
-            food_position);
-        glUniform3f(
-            glGetUniformLocation(shader_programm, "COLOR"),
-            color_food[0],
-            color_food[1],
-            color_food[2]);
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-
-        /* grid */
-        glUseProgram(grid_shader_programm);
-        glUniform3f(
-            glGetUniformLocation(grid_shader_programm, "COLOR"),
-            color_grid[0],
-            color_grid[1],
-            color_grid[2]);
-        int win_width, win_height;
-        glfwGetFramebufferSize(window, &win_width, &win_height);
-        glUniform2f(
-            glGetUniformLocation(grid_shader_programm, "WIN_SIZE"),
-            (GLfloat)win_width,
-            (GLfloat)win_height);
-        glUniform2f(
-            glGetUniformLocation(grid_shader_programm, "GRID_COUNT"),
-            (GLfloat)GRID_COUNT_X,
-            (GLfloat)GRID_COUNT_Y);
-        glUniform1f(
-            glGetUniformLocation(grid_shader_programm, "GRID_LINE_WIDTH"),
-            (GLfloat)GRID_LINE_WIDTH);
+        glUniform1f(glGetUniformLocation(shader_programm, "POSITION"), food_position);
+        glUniform3f(glGetUniformLocation(shader_programm, "COLOR"), 1.0, 0.0, 0.0);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 
-        glfwSwapBuffers(window);
+        glfwSwapBuffers(screen.window);
         glfwPollEvents();
     }
 
