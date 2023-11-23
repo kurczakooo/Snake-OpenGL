@@ -20,7 +20,7 @@ int Screen::glfw_init() {
 }
 
 //tworzy okno
-int Screen::window_init() {        //1K x 1K dla latwiejszego rysowania              
+int Screen::window_init() {            
     this->window = glfwCreateWindow(this->width, this->height, this->title.c_str(), nullptr, nullptr);
     if (!window) {
         std::cerr << "Error with creating the Window" << std::endl;

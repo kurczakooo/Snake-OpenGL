@@ -1,14 +1,15 @@
 #include "Screen.h"
+#include "Bitmap.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include "Libraries/stb_image.h"
 
-#define WINDOW_WIDTH  800
-#define WINDOW_HEIGHT 800
+#define WINDOW_WIDTH  500
+#define WINDOW_HEIGHT 500
 
-#define SPEED 8/* snake actions per second */
+#define SPEED 4/* snake actions per second */
 
-#define MAP_WIDTH 32
-#define MAP_HEIGHT 32
-
-#define GRID_LINE_WIDTH 2
+#define MAP_WIDTH 8
+#define MAP_HEIGHT 8
 
 
 GLfloat vertices[] = {
@@ -25,8 +26,10 @@ GLuint indices[] = {
 const GLchar* vShader_Code =
 "#version 330 core\n"
 "layout (location = 0) in vec2 v_pos;\n"
+"layout (location = 1) in vec2 v_texCoord;\n"
 "uniform float POSITION;\n"
 "uniform vec2 GRID_COUNT;\n"
+"out vec2 texCoord;\n"
 "void main(){\n"
 "  vec2 GRID_SIZE = vec2(2 / GRID_COUNT.x, 2 / GRID_COUNT.y);\n"
 "  vec2 pos_center = vec2((mod(POSITION, GRID_COUNT.x) * GRID_SIZE.x) - 1.0 + (GRID_SIZE.x / 2),\n"
@@ -35,14 +38,18 @@ const GLchar* vShader_Code =
 "    pos_center.x - (GRID_SIZE.x / 2) + (v_pos.x * GRID_SIZE.x),\n"
 "    pos_center.y - (GRID_SIZE.y / 2) + (v_pos.y * GRID_SIZE.y),\n"
 "    0.0, 1.0);\n"
+"    texCoord = v_texCoord;\n"
 "}\0";
 
 const GLchar* fShader_Code =
 "#version 330 core\n"
 "out vec4 fragment_color;\n"
 "uniform vec3 COLOR;\n"
+"in vec2 texCoord;\n"
+"uniform sampler2D SNAKE_HEAD;\n"
 "void main(){\n"
-"  fragment_color = vec4(COLOR, 1.0);\n"
+"   vec4 texColor = texture(SNAKE_HEAD, texCoord);\n"
+"   fragment_color = vec4(COLOR, 1.0);\n"
 "}\0";
 
 
@@ -191,7 +198,7 @@ void key_functions(GLFWwindow* window)
     if (keyboard.keys[GLFW_KEY_ESCAPE].down)
         glfwSetWindowShouldClose(window, GLFW_TRUE);
     if (keyboard.keys[GLFW_KEY_SPACE].pressed)
-        snake.direction |= PAUSE;
+        snake.direction ^= PAUSE;
 
     if (keyboard.keys[GLFW_KEY_LEFT].pressed)
         if ((snake.direction != LEFT) && !(snake.direction & RIGHT))
@@ -226,13 +233,28 @@ int main(void) {
 
     screen.glfw_init();
 
-    srand(time(NULL));
-
     screen.window_init();
 
     screen.glad_init();
 
     glfwSetKeyCallback(screen.window, key_callback);
+
+
+    //Texture snake_head("components\skubi.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+
+    GLuint texture;
+    int width, height, channels;
+    unsigned char* image = stbi_load("components/skubi.png", &width, &height, &channels, STBI_rgb_alpha);
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+    stbi_image_free(image);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
 
 
     GLuint vShader, fShader, shader_programm;
@@ -301,8 +323,13 @@ int main(void) {
         {
             glUniform1f(glGetUniformLocation(shader_programm, "POSITION"), snake.positions[i]);
 
-            if (i == 0)
-                glUniform3f( glGetUniformLocation(shader_programm, "COLOR"), 0.5, 1.0, 0.5); //zrobimy ze glowa sneka to bedzie skubi, ja sie tym zajme
+            if (i == 0) {
+                //glUniform3f(glGetUniformLocation(shader_programm, "COLOR"), 0.5, 1.0, 0.5); //zrobimy ze glowa sneka to bedzie skubi, ja sie tym zajme
+
+                glUniform1i(glGetUniformLocation(shader_programm, "SNAKE_HEAD"), 0);
+                glActiveTexture(GL_TEXTURE0);
+                glBindTexture(GL_TEXTURE_2D, texture);
+            }
             else
                 glUniform3f(glGetUniformLocation(shader_programm, "COLOR"),0.5, 1.0, 0.5);
 
