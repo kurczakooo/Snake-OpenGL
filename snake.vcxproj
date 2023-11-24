@@ -152,9 +152,6 @@
     <ClInclude Include="Screen.h" />
     <ClInclude Include="Snake.h" />
   </ItemGroup>
-  <ItemGroup>
-    <Text Include="starymain.txt" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

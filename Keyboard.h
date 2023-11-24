@@ -2,7 +2,7 @@
 #include "Screen.h"
 #include "Buttons.h"
 
-class Keyboard
+class Keyboard : public Screen
 {
 public:
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);

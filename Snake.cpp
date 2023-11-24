@@ -100,7 +100,7 @@ void Snake::key_functions(GLFWwindow* window)
     if (keyboard.keys[GLFW_KEY_ESCAPE].down)
         glfwSetWindowShouldClose(window, GLFW_TRUE);
     if (keyboard.keys[GLFW_KEY_SPACE].pressed)
-        snake.direction ^= PAUSE;
+        snake.direction = PAUSE;
 
     if (keyboard.keys[GLFW_KEY_LEFT].pressed)
         if ((snake.direction != LEFT) && !(snake.direction & RIGHT))

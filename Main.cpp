@@ -1,11 +1,9 @@
 #include "Screen.h"
 #include "Bitmap.h"
-
 #include "Keyboard.h"
 #include "Snake.h"
 #include "Buttons.h"
 #include "Directions.h"
-
 #define STB_IMAGE_IMPLEMENTATION
 #include "Libraries/stb_image.h"
 
@@ -13,7 +11,6 @@
 Snake snake;
 GLuint food_position;
 GLdouble TIME_NOW, TIME_LAST, TIME_DELTA, TIME_SUM;
-
 Keyboard keyboard;
 
 GLfloat vertices[] = {

@@ -1,12 +1,12 @@
-﻿  Main.cpp
-C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(139,34): warning C4305: "argument": obcięcie z "double" do "GLfloat"
-C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(139,28): warning C4305: "argument": obcięcie z "double" do "GLfloat"
-C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(139,22): warning C4305: "argument": obcięcie z "double" do "GLfloat"
-C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(161,93): warning C4244: "argument": konwersja z "GLuint" do "GLfloat", możliwa utrata danych
-C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(169,93): warning C4305: "argument": obcięcie z "double" do "GLfloat"
-C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(169,85): warning C4305: "argument": obcięcie z "double" do "GLfloat"
-C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(169,77): warning C4305: "argument": obcięcie z "double" do "GLfloat"
-C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(176,72): warning C4244: "argument": konwersja z "GLuint" do "GLfloat", możliwa utrata danych
+﻿  Keyboard.cpp
+  Main.cpp
+C:\Users\damia\Desktop\snake\Main.cpp(14,10): error C2280: „Keyboard::Keyboard(void)”: próba odwania do usuniętej funkcji
+C:\Users\damia\Desktop\snake\Keyboard.h(12,1): message : w tym miejscu kompilator wygenerował „Keyboard::Keyboard”
+C:\Users\damia\Desktop\snake\Keyboard.h(12,1): message : „Keyboard::Keyboard(void)”: Funkcja została niejawnie usunięta, ponieważ element klasa bazowa „Screen” albo nie ma odpowiedniego elementu domyślny konstruktor, albo rozpoznanie przeciążenia było niejednoznaczne
+C:\Users\damia\Desktop\snake\Screen.h(11,7): message : zobacz deklarację „Screen”
+C:\Users\damia\Desktop\snake\Main.cpp(136,43): warning C4305: "argument": obcięcie z "double" do "GLfloat"
+C:\Users\damia\Desktop\snake\Main.cpp(158,93): warning C4244: "argument": konwersja z "GLuint" do "GLfloat", możliwa utrata danych
+C:\Users\damia\Desktop\snake\Main.cpp(166,99): warning C4305: "argument": obcięcie z "double" do "GLfloat"
+C:\Users\damia\Desktop\snake\Main.cpp(173,72): warning C4244: "argument": konwersja z "GLuint" do "GLfloat", możliwa utrata danych
   Snake.cpp
   Generowanie kodu...
-  snake.vcxproj -> C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\x64\Debug\snake.exe
