@@ -1,0 +1,20 @@
+﻿  Bitmap.cpp
+  Keyboard.cpp
+C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Screen.h(7,10): error C1083: Nie można otworzyć pliku dołącz: 'glad/glad.h': No such file or directory
+  (kompilowanie pliku źródłowego „Bitmap.cpp”)
+  
+C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Screen.h(7,10): error C1083: Nie można otworzyć pliku dołącz: 'glad/glad.h': No such file or directory
+  (kompilowanie pliku źródłowego „Keyboard.cpp”)
+  
+  Main.cpp
+C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Screen.h(7,10): error C1083: Nie można otworzyć pliku dołącz: 'glad/glad.h': No such file or directory
+  (kompilowanie pliku źródłowego „Main.cpp”)
+  
+  Screen.cpp
+C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Screen.h(7,10): error C1083: Nie można otworzyć pliku dołącz: 'glad/glad.h': No such file or directory
+  (kompilowanie pliku źródłowego „Screen.cpp”)
+  
+  Snake.cpp
+C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Screen.h(7,10): error C1083: Nie można otworzyć pliku dołącz: 'glad/glad.h': No such file or directory
+  (kompilowanie pliku źródłowego „Snake.cpp”)
+  

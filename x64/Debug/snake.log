@@ -1,6 +1,12 @@
 ﻿  Main.cpp
-C:\Users\damia\Desktop\snake\Main.cpp(307,43): warning C4305: "argument": obcięcie z "double" do "GLfloat"
-C:\Users\damia\Desktop\snake\Main.cpp(329,93): warning C4244: "argument": konwersja z "GLuint" do "GLfloat", możliwa utrata danych
-C:\Users\damia\Desktop\snake\Main.cpp(337,99): warning C4305: "argument": obcięcie z "double" do "GLfloat"
-C:\Users\damia\Desktop\snake\Main.cpp(344,72): warning C4244: "argument": konwersja z "GLuint" do "GLfloat", możliwa utrata danych
-  snake.vcxproj -> C:\Users\damia\Desktop\snake\x64\Debug\snake.exe
+C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(139,34): warning C4305: "argument": obcięcie z "double" do "GLfloat"
+C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(139,28): warning C4305: "argument": obcięcie z "double" do "GLfloat"
+C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(139,22): warning C4305: "argument": obcięcie z "double" do "GLfloat"
+C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(161,93): warning C4244: "argument": konwersja z "GLuint" do "GLfloat", możliwa utrata danych
+C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(169,93): warning C4305: "argument": obcięcie z "double" do "GLfloat"
+C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(169,85): warning C4305: "argument": obcięcie z "double" do "GLfloat"
+C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(169,77): warning C4305: "argument": obcięcie z "double" do "GLfloat"
+C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(176,72): warning C4244: "argument": konwersja z "GLuint" do "GLfloat", możliwa utrata danych
+  Snake.cpp
+  Generowanie kodu...
+  snake.vcxproj -> C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\x64\Debug\snake.exe

@@ -1,1 +1,2 @@
 C:\Users\damia\Desktop\snake\x64\Debug\snake.exe
+C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\x64\Debug\snake.exe
