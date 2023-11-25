@@ -4,14 +4,12 @@
 #include "Snake.h"
 #include "Buttons.h"
 #include "Directions.h"
+#include "Texture.h"
+
 #define STB_IMAGE_IMPLEMENTATION
 #include "Libraries/stb_image.h"
 
 
-Snake snake;
-GLuint food_position;
-GLdouble TIME_NOW, TIME_LAST, TIME_DELTA, TIME_SUM;
-Keyboard keyboard;
 
 GLfloat vertices[] = {
   0.0, 0.0,
@@ -72,15 +70,16 @@ int main(void) {
     glfwSetKeyCallback(screen.window, keyboard.key_callback);
 
 
-    //Texture snake_head("components\skubi.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 
-    GLuint texture;
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    Snake snake;
+
+    GLuint food_position;
+
+    GLdouble TIME_NOW, TIME_LAST, TIME_DELTA, TIME_SUM;
+
+    Keyboard keyboard;
+
+    Texture texture;
 
     int width, height, channels;
     stbi_set_flip_vertically_on_load(GL_TRUE);
@@ -159,7 +158,7 @@ int main(void) {
 
             if (i == 0) {
                glUniform1i(glGetUniformLocation(shader_programm, "IS_HEAD"), 0);
-               glBindTexture(GL_TEXTURE_2D, texture);
+               glBindTexture(GL_TEXTURE_2D, texture.texture);
             }
             else {
                 glUniform1i(glGetUniformLocation(shader_programm, "IS_HEAD"), 1);

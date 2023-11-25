@@ -151,6 +151,7 @@
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="Snake.h" />
+    <ClInclude Include="Texture.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
