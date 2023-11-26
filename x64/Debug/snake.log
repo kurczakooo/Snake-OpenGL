@@ -1,25 +1,7 @@
 ﻿  Main.cpp
-C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(139,34): warning C4305: "argument": obcięcie z "double" do "GLfloat"
-C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(139,28): warning C4305: "argument": obcięcie z "double" do "GLfloat"
-C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(139,22): warning C4305: "argument": obcięcie z "double" do "GLfloat"
-C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(161,93): warning C4244: "argument": konwersja z "GLuint" do "GLfloat", możliwa utrata danych
-C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(169,93): warning C4305: "argument": obcięcie z "double" do "GLfloat"
-C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(169,85): warning C4305: "argument": obcięcie z "double" do "GLfloat"
-C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(169,77): warning C4305: "argument": obcięcie z "double" do "GLfloat"
-C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(176,72): warning C4244: "argument": konwersja z "GLuint" do "GLfloat", możliwa utrata danych
-glfw3.lib(init.obj) : warning LNK4099: nie znaleziono pliku PDB „” z elementem „glfw3.lib(init.obj)” lub w pozycji „”; obiekt zostanie skonsolidowany bez informacji debugowania
-glfw3.lib(window.obj) : warning LNK4099: nie znaleziono pliku PDB „” z elementem „glfw3.lib(window.obj)” lub w pozycji „”; obiekt zostanie skonsolidowany bez informacji debugowania
-glfw3.lib(input.obj) : warning LNK4099: nie znaleziono pliku PDB „” z elementem „glfw3.lib(input.obj)” lub w pozycji „”; obiekt zostanie skonsolidowany bez informacji debugowania
-glfw3.lib(context.obj) : warning LNK4099: nie znaleziono pliku PDB „” z elementem „glfw3.lib(context.obj)” lub w pozycji „”; obiekt zostanie skonsolidowany bez informacji debugowania
-glfw3.lib(win32_init.obj) : warning LNK4099: nie znaleziono pliku PDB „” z elementem „glfw3.lib(win32_init.obj)” lub w pozycji „”; obiekt zostanie skonsolidowany bez informacji debugowania
-glfw3.lib(win32_monitor.obj) : warning LNK4099: nie znaleziono pliku PDB „” z elementem „glfw3.lib(win32_monitor.obj)” lub w pozycji „”; obiekt zostanie skonsolidowany bez informacji debugowania
-glfw3.lib(win32_time.obj) : warning LNK4099: nie znaleziono pliku PDB „” z elementem „glfw3.lib(win32_time.obj)” lub w pozycji „”; obiekt zostanie skonsolidowany bez informacji debugowania
-glfw3.lib(win32_thread.obj) : warning LNK4099: nie znaleziono pliku PDB „” z elementem „glfw3.lib(win32_thread.obj)” lub w pozycji „”; obiekt zostanie skonsolidowany bez informacji debugowania
-glfw3.lib(monitor.obj) : warning LNK4099: nie znaleziono pliku PDB „” z elementem „glfw3.lib(monitor.obj)” lub w pozycji „”; obiekt zostanie skonsolidowany bez informacji debugowania
-glfw3.lib(vulkan.obj) : warning LNK4099: nie znaleziono pliku PDB „” z elementem „glfw3.lib(vulkan.obj)” lub w pozycji „”; obiekt zostanie skonsolidowany bez informacji debugowania
-glfw3.lib(win32_window.obj) : warning LNK4099: nie znaleziono pliku PDB „” z elementem „glfw3.lib(win32_window.obj)” lub w pozycji „”; obiekt zostanie skonsolidowany bez informacji debugowania
-glfw3.lib(win32_joystick.obj) : warning LNK4099: nie znaleziono pliku PDB „” z elementem „glfw3.lib(win32_joystick.obj)” lub w pozycji „”; obiekt zostanie skonsolidowany bez informacji debugowania
-glfw3.lib(wgl_context.obj) : warning LNK4099: nie znaleziono pliku PDB „” z elementem „glfw3.lib(wgl_context.obj)” lub w pozycji „”; obiekt zostanie skonsolidowany bez informacji debugowania
-glfw3.lib(egl_context.obj) : warning LNK4099: nie znaleziono pliku PDB „” z elementem „glfw3.lib(egl_context.obj)” lub w pozycji „”; obiekt zostanie skonsolidowany bez informacji debugowania
-glfw3.lib(osmesa_context.obj) : warning LNK4099: nie znaleziono pliku PDB „” z elementem „glfw3.lib(osmesa_context.obj)” lub w pozycji „”; obiekt zostanie skonsolidowany bez informacji debugowania
-  snake.vcxproj -> C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\x64\Debug\snake.exe
+C:\Users\damia\Desktop\snake\Main.cpp(67,43): warning C4305: "argument": obcięcie z "double" do "GLfloat"
+C:\Users\damia\Desktop\snake\Main.cpp(91,95): warning C4244: "argument": konwersja z "GLuint" do "GLfloat", możliwa utrata danych
+C:\Users\damia\Desktop\snake\Main.cpp(102,79): warning C4244: "argument": konwersja z "GLuint" do "GLfloat", możliwa utrata danych
+  Snake.cpp
+  Generowanie kodu...
+  snake.vcxproj -> C:\Users\damia\Desktop\snake\x64\Debug\snake.exe

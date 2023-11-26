@@ -3,6 +3,23 @@
 #include "Buttons.h"
 #include "Keyboard.h"
 
+void SnakeData::init() {
+    TIME_NOW = TIME_LAST = glfwGetTime();
+    TIME_DELTA = TIME_SUM = 0.0;
+}
+
+void SnakeData::set_tempo() {
+    TIME_NOW = glfwGetTime();
+    TIME_DELTA = TIME_NOW - TIME_LAST;
+    TIME_LAST = TIME_NOW;
+    TIME_SUM += TIME_DELTA;
+    if (TIME_SUM >= 1.0 / SPEED)
+    {
+        snake.snake_logic();
+        TIME_SUM = 0.0;
+    }
+}
+
 
 void Snake::_button_array_update(struct Button* buttons)
 {
@@ -40,16 +57,10 @@ void Snake::snake_logic(void)
         return;
 
     /* check wall hit */
-    if (
-        (snake.positions[0] % MAP_WIDTH == 0
-            && snake.direction == LEFT) ||
-        (snake.positions[0] % MAP_WIDTH == MAP_WIDTH - 1
-            && snake.direction == RIGHT) ||
-        (snake.positions[0] / MAP_WIDTH == 0
-            && snake.direction == UP) ||
-        (snake.positions[0] / MAP_WIDTH == MAP_HEIGHT - 1
-            && snake.direction == DOWN)
-        )
+    if ((snake.positions[0] % MAP_WIDTH == 0 && snake.direction == LEFT) ||
+        (snake.positions[0] % MAP_WIDTH == MAP_WIDTH - 1 && snake.direction == RIGHT) ||
+        (snake.positions[0] / MAP_WIDTH == 0 && snake.direction == UP) ||
+        (snake.positions[0] / MAP_WIDTH == MAP_HEIGHT - 1 && snake.direction == DOWN))
     {
         snake.counter = 1;
         snake.direction = PAUSE;

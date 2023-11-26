@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 #include <time.h>
+#include<fstream>
+#include<sstream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 

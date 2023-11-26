@@ -1,6 +1,6 @@
 #pragma once
 #include "Screen.h"
-#include "Bitmap.h"
+
 
 #define WINDOW_WIDTH  800
 #define WINDOW_HEIGHT 800
@@ -10,12 +10,14 @@
 
 #define SPEED 4 // Snake speed
 
+
 class Snake
 {
 public:
     GLuint counter;
     GLuint positions[MAP_WIDTH * MAP_HEIGHT];
     GLuint direction;
+    GLuint food_position;
 
     GLuint random_position(void);
     void snake_logic(void);
@@ -24,5 +26,4 @@ public:
 };
 
 extern Snake snake;
-extern GLuint food_position;
 extern GLdouble TIME_NOW, TIME_LAST, TIME_DELTA, TIME_SUM;
