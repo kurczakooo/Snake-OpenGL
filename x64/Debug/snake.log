@@ -1,7 +1,2 @@
-﻿  Main.cpp
-C:\Users\damia\Desktop\snake\Main.cpp(67,43): warning C4305: "argument": obcięcie z "double" do "GLfloat"
-C:\Users\damia\Desktop\snake\Main.cpp(91,95): warning C4244: "argument": konwersja z "GLuint" do "GLfloat", możliwa utrata danych
-C:\Users\damia\Desktop\snake\Main.cpp(102,79): warning C4244: "argument": konwersja z "GLuint" do "GLfloat", możliwa utrata danych
-  Snake.cpp
-  Generowanie kodu...
+﻿  Snake.cpp
   snake.vcxproj -> C:\Users\damia\Desktop\snake\x64\Debug\snake.exe

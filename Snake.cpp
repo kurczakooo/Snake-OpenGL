@@ -3,23 +3,6 @@
 #include "Buttons.h"
 #include "Keyboard.h"
 
-void SnakeData::init() {
-    TIME_NOW = TIME_LAST = glfwGetTime();
-    TIME_DELTA = TIME_SUM = 0.0;
-}
-
-void SnakeData::set_tempo() {
-    TIME_NOW = glfwGetTime();
-    TIME_DELTA = TIME_NOW - TIME_LAST;
-    TIME_LAST = TIME_NOW;
-    TIME_SUM += TIME_DELTA;
-    if (TIME_SUM >= 1.0 / SPEED)
-    {
-        snake.snake_logic();
-        TIME_SUM = 0.0;
-    }
-}
-
 
 void Snake::_button_array_update(struct Button* buttons)
 {
