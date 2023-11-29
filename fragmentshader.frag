@@ -11,7 +11,13 @@ in vec2 texCoord;
 void main()
 {
     if(IS_HEAD == 0)
-        fragment_color = texture(SNAKE_HEAD, texCoord);
-    else
+        fragment_color = texture(SNAKE_HEAD, vec2(texCoord.x, texCoord.y));
+    else if(IS_HEAD == 1)
         fragment_color = vec4(COLOR, 1.0);
+    else if(IS_HEAD == 2)
+        fragment_color = texture(SNAKE_HEAD, vec2(1 - texCoord.x, 1 - texCoord.y));
+    else if(IS_HEAD == 3)
+        fragment_color = texture(SNAKE_HEAD, vec2(1 - texCoord.y, 1 - texCoord.x));
+    else if(IS_HEAD == 4)
+        fragment_color = texture(SNAKE_HEAD, vec2(texCoord.y, texCoord.x));
 }

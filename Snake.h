@@ -21,7 +21,7 @@ public:
 
     GLuint random_position(void);
     void snake_logic(void);
-    void key_functions(GLFWwindow* window);
+    void key_functions(GLFWwindow* window, GLuint shaderID, GLuint texture, float vertices[]);
     void _button_array_update(struct Button* buttons);
 };
 

@@ -86,7 +86,7 @@ void Snake::snake_logic(void)
         food_position = random_position();
 }
 
-void Snake::key_functions(GLFWwindow* window)
+void Snake::key_functions(GLFWwindow* window, GLuint shaderID, GLuint texture, float vertices[])
 {
     _button_array_update(keyboard.keys);
     GLuint _last_snake_direction = snake.direction;
@@ -97,7 +97,7 @@ void Snake::key_functions(GLFWwindow* window)
         snake.direction = PAUSE;
 
     if (keyboard.keys[GLFW_KEY_LEFT].pressed)
-        if ((snake.direction != LEFT) && !(snake.direction & RIGHT))
+        if ((snake.direction != LEFT) && !(snake.direction & RIGHT)) 
             snake.direction = LEFT;
 
     if (keyboard.keys[GLFW_KEY_RIGHT].pressed)

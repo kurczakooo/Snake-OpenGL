@@ -1,12 +1,11 @@
 #include "Screen.h"
 #include "Keyboard.h"
+#include "Mouse.h"
 #include "Snake.h"
 #include "Buttons.h"
 #include "Directions.h"
 #include "Texture.h"
 
-//obluga myszki
-//zmiana kierunku glowy skubiego
 //hierarchia klas
 //komentarze
 //dokumentacja
@@ -15,6 +14,7 @@ GLdouble TIME_NOW, TIME_LAST, TIME_DELTA, TIME_SUM;
 Snake snake;
 
 Keyboard keyboard;
+Mouse mouse;
 
 GLfloat vertices[] = {
   0.0, 0.0,
@@ -36,6 +36,7 @@ int main(void) {
     screen.glad_init();
 
     glfwSetKeyCallback(screen.window, keyboard.key_callback);
+    glfwSetMouseButtonCallback(screen.window, mouse.mouse_button_callback);
 
     Texture texture_skubi("components/skubi.png");
 
@@ -71,7 +72,7 @@ int main(void) {
         glClearColor(0.14, 0.16, 0.18, 1.0);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        snake.key_functions(screen.window);
+        snake.key_functions(screen.window, shader_program.ID, texture_skubi.ID, vertices);
 
         TIME_NOW = glfwGetTime();
         TIME_DELTA = TIME_NOW - TIME_LAST;
@@ -93,8 +94,9 @@ int main(void) {
         {
             glUniform1f(glGetUniformLocation(shader_program.ID, "POSITION"), snake.positions[i]);
 
-            if (i == 0)
-                shader_program.generate_snake_head("IS_HEAD", texture_skubi.ID);
+            if (i == 0) {
+                shader_program.generate_snake_head("IS_HEAD", texture_skubi.ID, snake);
+            }
             else
                 shader_program.generate_snake_body("IS_HEAD", "COLOR");
 

@@ -51,10 +51,30 @@ void Shader::generate_map(const char* uniform_id, int map_width, int map_height)
 	glUniform2f(glGetUniformLocation(ID, uniform_id), (GLfloat)map_width, (GLfloat)map_height);
 }
 
-void Shader::generate_snake_head(const char* uniform_id, GLuint texture) {
+void Shader::generate_snake_head(const char* uniform_id, GLuint texture, Snake snake) {
 
-	glUniform1i(glGetUniformLocation(ID, uniform_id), 0);
-	glBindTexture(GL_TEXTURE_2D, texture);
+	switch (snake.direction) {
+	case UP:
+		glUniform1i(glGetUniformLocation(ID, uniform_id), 0);
+		glBindTexture(GL_TEXTURE_2D, texture);
+		break;
+	case DOWN:
+		glUniform1i(glGetUniformLocation(ID, uniform_id), 2);
+		glBindTexture(GL_TEXTURE_2D, texture);
+		break;
+	case LEFT:
+		glUniform1i(glGetUniformLocation(ID, uniform_id), 3);
+		glBindTexture(GL_TEXTURE_2D, texture);
+		break;
+	case RIGHT:
+		glUniform1i(glGetUniformLocation(ID, uniform_id), 4);
+		glBindTexture(GL_TEXTURE_2D, texture);
+		break;
+	default:
+		glUniform1i(glGetUniformLocation(ID, uniform_id), 0);
+		glBindTexture(GL_TEXTURE_2D, texture);
+		break;
+	}
 }
 
 void Shader::generate_snake_body(const char* condition_uniform_id, const char* uniform_id) {

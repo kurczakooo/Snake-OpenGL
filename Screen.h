@@ -19,6 +19,7 @@ public:
 	std::string title;
 	  //jak widzisz klasa przechowuje okno i metody tworzace je, inicjalizujace glfw i glad
 public:
+	Screen() {};
 	  Screen(int width, int height, std::string title);
 	  int glfw_init();
 	  int window_init();

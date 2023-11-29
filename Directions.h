@@ -1,6 +1,6 @@
 #pragma once
 
-enum Directions
+static enum Directions
 {
     LEFT = 1,
     RIGHT = 2,
