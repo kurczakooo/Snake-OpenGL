@@ -1,4 +1,15 @@
-﻿  Shader.cpp
-C:\Users\damia\Desktop\snake\Directions.h(10,2): warning C4091: "static ": zignorowano na lewo od "Directions" podczas gdy brak deklaracji zmiennej
-C:\Users\damia\Desktop\snake\Shader.cpp(83,74): warning C4305: "argument": obcięcie z "double" do "GLfloat"
-  snake.vcxproj -> C:\Users\damia\Desktop\snake\x64\Debug\snake.exe
+﻿  Main.cpp
+C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Directions.h(10,2): warning C4091: "static ": zignorowano na lewo od "Directions" podczas gdy brak deklaracji zmiennej
+  (kompilowanie pliku źródłowego „Main.cpp”)
+  
+C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(83,34): warning C4305: "argument": obcięcie z "double" do "GLfloat"
+C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(83,28): warning C4305: "argument": obcięcie z "double" do "GLfloat"
+C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(83,22): warning C4305: "argument": obcięcie z "double" do "GLfloat"
+C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(106,95): warning C4244: "argument": konwersja z "GLuint" do "GLfloat", możliwa utrata danych
+C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Main.cpp(118,79): warning C4244: "argument": konwersja z "GLuint" do "GLfloat", możliwa utrata danych
+  Texture.cpp
+C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\Directions.h(10,2): warning C4091: "static ": zignorowano na lewo od "Directions" podczas gdy brak deklaracji zmiennej
+  (kompilowanie pliku źródłowego „Texture.cpp”)
+  
+  Generowanie kodu...
+  snake.vcxproj -> C:\Users\Seweryn\Desktop\StudiaS3\GrafikaKomputerowa\Snake-OpenGL\x64\Debug\snake.exe

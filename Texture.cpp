@@ -1,11 +1,21 @@
+/**
+ * @file Texture.cpp
+ * @brief Implementacja metody klasy Texture.
+ */
+
 #include "Texture.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "Libraries/stb_image.h"
 
-Texture::Texture(const char* image)
-{
-
+ /**
+  * @brief Konstruktor klasy Texture.
+  *
+  * Inicjalizuje obiekt tekstury, wczytuje obrazek i ustawia parametry tekstury.
+  *
+  * @param image Œcie¿ka do pliku z obrazkiem.
+  */
+Texture::Texture(const char* image) {
 	glGenTextures(1, &ID);
 	glBindTexture(GL_TEXTURE_2D, ID);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);

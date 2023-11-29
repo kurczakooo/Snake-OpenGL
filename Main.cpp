@@ -1,3 +1,8 @@
+/**
+ * @file Main.cpp
+ * @brief Plik zawieraj¹cy funkcjê g³ówn¹ programu.
+ */
+
 #include "Screen.h"
 #include "Keyboard.h"
 #include "Mouse.h"
@@ -6,16 +11,14 @@
 #include "Directions.h"
 #include "Texture.h"
 
-//hierarchia klas
-//komentarze
-//dokumentacja
-
+ // Definicje zmiennych globalnych
 GLdouble TIME_NOW, TIME_LAST, TIME_DELTA, TIME_SUM;
 Snake snake;
 
 Keyboard keyboard;
 Mouse mouse;
 
+// Wierzcho³ki kwadratu
 GLfloat vertices[] = {
   0.0, 0.0,
   0.0, 1.0,
@@ -23,13 +26,20 @@ GLfloat vertices[] = {
   1.0, 0.0,
 };
 
+// Indeksy wierzcho³ków tworz¹cych kwadrat
 GLuint indices[] = {
   0, 1, 2,
   2, 3, 0
 };
 
+/**
+ * @brief Funkcja g³ówna programu.
+ *
+ * Inicjalizuje okno, obiekty gry, wczytuje tekstury i shadery, oraz obs³uguje g³ówn¹ pêtlê gry.
+ */
 int main(void) {
 
+    // Inicjalizacja obiektów
     Screen screen(WINDOW_WIDTH, WINDOW_HEIGHT, "snake");
     screen.glfw_init();
     screen.window_init();
@@ -53,11 +63,11 @@ int main(void) {
     glGenBuffers(1, &EBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-    
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), 0);
-	glEnableVertexAttribArray(0);
-    
 
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), 0);
+    glEnableVertexAttribArray(0);
+
+    // Inicjalizacja obiektu wê¿a
     snake.counter = 1;
     snake.positions[0] = (GLuint)(rand() % (MAP_WIDTH * MAP_HEIGHT));
     snake.direction = PAUSE;
@@ -67,6 +77,7 @@ int main(void) {
     TIME_NOW = TIME_LAST = glfwGetTime();
     TIME_DELTA = TIME_SUM = 0.0;
 
+    // G³ówna pêtla gry
     while (!glfwWindowShouldClose(screen.window))
     {
         glClearColor(0.14, 0.16, 0.18, 1.0);
@@ -107,7 +118,6 @@ int main(void) {
         glUniform1f(glGetUniformLocation(shader_program.ID, "POSITION"), snake.food_position);
         shader_program.generate_food("IS_HEAD", "COLOR");
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-
 
         glfwSwapBuffers(screen.window);
         glfwPollEvents();
