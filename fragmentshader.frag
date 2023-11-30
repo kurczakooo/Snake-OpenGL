@@ -4,9 +4,11 @@ out vec4 fragment_color;
 
 uniform vec3 COLOR;
 uniform sampler2D SNAKE_HEAD;
+uniform sampler2D FOOD;
 uniform int IS_HEAD;
 
 in vec2 texCoord;
+in vec2 foodTexCoord;
 
 void main()
 {
@@ -20,4 +22,6 @@ void main()
         fragment_color = texture(SNAKE_HEAD, vec2(1 - texCoord.y, 1 - texCoord.x));
     else if(IS_HEAD == 4)
         fragment_color = texture(SNAKE_HEAD, vec2(texCoord.y, texCoord.x));
+    else if(IS_HEAD == 5)
+        fragment_color = texture(FOOD, vec2(foodTexCoord.x, foodTexCoord.y));
 }

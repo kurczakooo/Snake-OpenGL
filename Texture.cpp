@@ -25,8 +25,12 @@ Texture::Texture(const char* image) {
 
 	int width, height, channels;
 	stbi_set_flip_vertically_on_load(GL_TRUE);
-	unsigned char* loaded_image = stbi_load(image, &width, &height, &channels, 0);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, loaded_image);
+	unsigned char* loaded_image = stbi_load(image, &width, &height, &channels, STBI_rgb_alpha);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, loaded_image);
 	glGenerateMipmap(GL_TEXTURE_2D);
 	stbi_image_free(loaded_image);
+
+	glBindTexture(GL_TEXTURE_2D, ID);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }

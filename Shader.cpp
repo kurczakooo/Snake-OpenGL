@@ -135,8 +135,9 @@ void Shader::generate_snake_body(const char* condition_uniform_id, const char* u
  * @param condition_uniform_id Identyfikator zmiennej jednorodnej warunkowej w shaderze.
  * @param uniform_id Identyfikator zmiennej jednorodnej w shaderze.
  */
-void Shader::generate_food(const char* condition_uniform_id, const char* uniform_id) {
+void Shader::generate_food(const char* condition_uniform_id, GLuint texture) {
 
-	glUniform1i(glGetUniformLocation(ID, condition_uniform_id), 1);
-	glUniform3f(glGetUniformLocation(ID, uniform_id), 1.0, 0.0, 0.0);
+	glUniform1i(glGetUniformLocation(ID, condition_uniform_id), 5);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	//glUniform3f(glGetUniformLocation(ID, uniform_id), 1.0, 0.0, 0.0);
 }

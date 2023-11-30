@@ -1,6 +1,3 @@
-﻿  Main.cpp
+﻿  Texture.cpp
 C:\Users\damia\Desktop\snake\Directions.h(10,2): warning C4091: "static ": zignorowano na lewo od "Directions" podczas gdy brak deklaracji zmiennej
-C:\Users\damia\Desktop\snake\Main.cpp(83,43): warning C4305: "argument": obcięcie z "double" do "GLfloat"
-C:\Users\damia\Desktop\snake\Main.cpp(106,95): warning C4244: "argument": konwersja z "GLuint" do "GLfloat", możliwa utrata danych
-C:\Users\damia\Desktop\snake\Main.cpp(117,79): warning C4244: "argument": konwersja z "GLuint" do "GLfloat", możliwa utrata danych
   snake.vcxproj -> C:\Users\damia\Desktop\snake\x64\Debug\snake.exe

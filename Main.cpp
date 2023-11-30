@@ -49,6 +49,7 @@ int main(void) {
     glfwSetMouseButtonCallback(screen.window, mouse.mouse_button_callback);
 
     Texture texture_skubi("components/skubi.png");
+    Texture texture_food("components/food.png");
 
     Shader shader_program("vertexshader.vert", "fragmentshader.frag");
 
@@ -115,7 +116,7 @@ int main(void) {
 
         /* food */
         glUniform1f(glGetUniformLocation(shader_program.ID, "POSITION"), snake.food_position);
-        shader_program.generate_food("IS_HEAD", "COLOR");
+        shader_program.generate_food("IS_HEAD", texture_food.ID);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
         glfwSwapBuffers(screen.window);
