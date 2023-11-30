@@ -69,7 +69,7 @@ int main(void) {
 
     // Inicjalizacja obiektu wê¿a
     snake.counter = 1;
-    snake.positions[0] = (GLuint)(rand() % (MAP_WIDTH * MAP_HEIGHT));
+    snake.positions[0] = snake.random_position();
     snake.direction = PAUSE;
 
     snake.food_position = snake.random_position();
@@ -105,9 +105,8 @@ int main(void) {
         {
             glUniform1f(glGetUniformLocation(shader_program.ID, "POSITION"), snake.positions[i]);
 
-            if (i == 0) {
+            if (i == 0)
                 shader_program.generate_snake_head("IS_HEAD", texture_skubi.ID, snake);
-            }
             else
                 shader_program.generate_snake_body("IS_HEAD", "COLOR");
 

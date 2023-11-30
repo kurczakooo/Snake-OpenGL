@@ -2,8 +2,6 @@
 
 layout (location = 0) in vec2 v_pos;
 
-layout (location = 1) in vec2 v_texCoord;
-
 uniform float POSITION;
 uniform vec2 GRID_COUNT;
 
